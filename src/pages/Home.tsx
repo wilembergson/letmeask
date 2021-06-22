@@ -3,6 +3,7 @@ import logoImg from '../assets/images/logo.svg'
 import googleIconImage from '../assets/images/google-icon.svg'
 
 import '../styles/auth.scss'
+import { Button } from '../components/Button'
 
 export function Home(){
     return(
@@ -25,7 +26,7 @@ export function Home(){
                             type="text"
                             placeholder="Digite o codigo da sala"
                         />
-                        <button type="submit">Entrar em uma sala</button>
+                        <Button type="submit">Entrar em uma sala</Button>
                     </form>
                 </div>
             </main>
