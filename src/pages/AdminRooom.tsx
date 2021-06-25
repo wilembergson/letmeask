@@ -16,14 +16,14 @@ type RoomParams = {
     id: string
 }
 
-export function Room() {
+export function AdminRoom() {
     const { user } = useAuth()
     const params = useParams<RoomParams>()
     const [newQuestion, setNewQuestion] = useState('')
     const roomId = params.id
 
     const { title, questions } = useRoom(roomId)
-   
+
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault()
 
@@ -55,34 +55,20 @@ export function Room() {
             <header>
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
+                    <div>
                     <RoomCode code={roomId} />
+                    <Button>Encerrar sala</Button>
+                    </div>
                 </div>
             </header>
 
             <main>
-                <form onSubmit={handleSendQuestion}>
-                    <div className="room-title">
-                        <h1>Sala {title}</h1>
-                        {questions.length > 0 && <span>{questions.length} perguntas</span>}
-                    </div>
-                    <textarea placeholder="O que você quer perguntar?"
-                        onChange={event => setNewQuestion(event.target.value)}
-                        value={newQuestion}
-                    />
-
-                    <div className="form-footer">
-                        {user ? (
-                            <div className="user-info">
-                                <img src={user.avatar} alt={user.name} />
-                                <span>{user.name}</span>
-                            </div>
-                        ) : (
-                            <div><span>Se quiser enviar uma pergunta, </span><button className="button-logar">click para logar</button></div>
-                        )}
-                    </div>
-                    <Button type="submit" disabled={!user}>Enviar pergunta</Button>
-
-                    <div className="question-list">
+                <div>
+                <div className="room-title">
+                    <h1>Sala {title}</h1>
+                    {questions.length > 0 && <span>{questions.length} perguntas</span>}
+                </div>
+                <div className="question-list">
                         {questions.map(question => {
                             return (
                                 <Question
@@ -93,7 +79,7 @@ export function Room() {
                             )
                         })}
                     </div>
-                </form>
+                </div>
             </main>
         </div>
     )
